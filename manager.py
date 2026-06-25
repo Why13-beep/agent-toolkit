@@ -2,13 +2,12 @@
 
 from typing import Dict, List, Optional
 import json
-from . import Tools
 
 class ToolManager:
     # Mengelola semua tools dan integrasi dengan LLM func calling
 
-    def __init__ (self, tools: Tools):
-        self.tools = tools
+    def __init__ (self, tools_instance):
+        self.tools = tools_instance
     
     def get_definitions(self) -> List[Dict]:
         # Definisi tools untuk calling
