@@ -4,14 +4,14 @@ import random
 import pycountry
 from .base_tool import BaseTool
 from .gps import GPSTool
-from .config import SEARX_URL
+from .config import SEARX_URLS
 from typing import Optional
 
 class SearchTool(BaseTool):
     def __init__(self, gps_tool: GPSTool):
         super().__init__()
         self.gps = gps_tool
-        self.searx_url = SEARX_URL
+        self.searx_url = SEARX_URLS
         self._active_url_cache = None
 
     def _get_active_instance(self) -> str:
