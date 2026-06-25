@@ -1,0 +1,49 @@
+
+
+graph TD
+    subgraph "User Interface / Brain"
+        User[User Input] --> Brain[Brain/ Orchestrator]
+    end
+
+    subgraph "Tool Orchestration Layer"
+        Brain --> TM[ToolManager]
+        TM -->|Get Definitions| LLM[LLM Function Calling]
+        LLM -->|Execute Command| TM
+    end
+
+    subgraph "Core Tools Modules"
+        TM --> Weather[WeatherTool]
+        TM --> Search[SearchTool]
+        TM --> DateTime[DatetimeTool]
+        TM --> GPS[GPSTool]
+    end
+
+    subgraph "Logic & Optimization"
+        Search -->|Check Instance| Fallback[_get_active_instance]
+        Fallback -->|Cache/Random| SearxList[List of SearXNG URLs]
+        
+        Weather -->|Override City?| Geo[static_geocode_city]
+        GPS -->|Update Location?| SmartLogic[update_location_smart > 5km]
+        GPS -->|Timezone| TF[timezonefinder Library]
+    end
+
+    subgraph "External Services & Storage"
+        SearxList --> Internet[Internet Search Results]
+        Geo --> Nominatim[Nominatim OSM API]
+        Weather --> Meteo[Open-Meteo API]
+        GPS --> DB[(SQLite Database)]
+        DateTime --> SysClock[System Clock / ZoneInfo]
+    end
+
+    Internet --> Search
+    Nominatim --> Geo
+    Meteo --> Weather
+    DB --> GPS
+    SysClock --> DateTime
+
+    Search --> TM
+    Weather --> TM
+    DateTime --> TM
+    GPS --> TM
+
+    TM -->|Final Response| Brain
