@@ -20,6 +20,7 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -50,6 +51,11 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Translations
 *.mo
@@ -149,6 +155,10 @@ activemq-data/
 
 # Environments
 .env
+.env.local
+config_secret.py
+*.pem
+*.key
 .envrc
 .venv
 env/
@@ -156,6 +166,27 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Database & Storage
+database/
+*.db
+*.sqlite3
+*.sqlite
+
+# Logs
+*.log
+logs/
+
+# OS Files
+.DS_Store
+Thumbs.db
 
 # Spyder project settings
 .spyderproject
